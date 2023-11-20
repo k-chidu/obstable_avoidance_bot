@@ -12,7 +12,7 @@ class SensorNode(Node):
         super().__init__('sensor_node')
         self.publisher_ = self.create_publisher(Float32, 'distance_topic', 1)
         self.timer = self.create_timer(0.1, self.publish_distance)
-         GPIO.setmode(GPIO.BCM)
+        GPIO.setmode(GPIO.BCM)
         TRIG_PIN = 14                                                                                                                                                                                              
         ECHO_PIN = 15
   
