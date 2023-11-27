@@ -9,8 +9,8 @@ import time
 
 class SensorNode(Node):
     def __init__(self):
-        super().__init__('middle_sensor_node')
-        self.publisher_ = self.create_publisher(Float32, 'middle_sensor_measurement', 1)
+        super().__init__('right_sensor_node')
+        self.publisher_ = self.create_publisher(Float32, 'right_sensor_measurement', 1)
         self.timer = self.create_timer(0.1, self.publish_distance)
 
     def measure_distance(self):
@@ -52,8 +52,8 @@ def main(args=None):
 
 if __name__ == '__main__':
     GPIO.setmode(GPIO.BCM)
-    TRIG_PIN = 14
-    ECHO_PIN = 15
+    TRIG_PIN = 8
+    ECHO_PIN = 7
 
     # Setup GPIO pins
     GPIO.setup(TRIG_PIN, GPIO.OUT)
