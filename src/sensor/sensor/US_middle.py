@@ -12,7 +12,7 @@ class SensorNode(Node):
         super().__init__('middle_sensor_node')
         self.publisher_ = self.create_publisher(Float32, 'distance_topic', 1)
         self.timer = self.create_timer(0.1, self.publish_distance)
-        
+
     def measure_distance(self):
         pulse_start_time = 0
         pulse_end_time = 0
