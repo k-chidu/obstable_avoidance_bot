@@ -9,17 +9,10 @@ import time
 
 class SensorNode(Node):
     def __init__(self):
-        super().__init__('sensor_node')
+        super().__init__('middle_sensor_node')
         self.publisher_ = self.create_publisher(Float32, 'distance_topic', 1)
         self.timer = self.create_timer(0.1, self.publish_distance)
-         GPIO.setmode(GPIO.BCM)
-        TRIG_PIN = 14                                                                                                                                                                                              
-        ECHO_PIN = 15
-  
-        # Setup GPIO pins
-        GPIO.setup(TRIG_PIN, GPIO.OUT)
-        GPIO.setup(ECHO_PIN, GPIO.IN)
-
+        
     def measure_distance(self):
         pulse_start_time = 0
         pulse_end_time = 0
@@ -56,3 +49,14 @@ def main(args=None):
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
+
+if __name__ == '__main__':
+    GPIO.setmode(GPIO.BCM)
+    TRIG_PIN = 14
+    ECHO_PIN = 15
+
+    # Setup GPIO pins
+    GPIO.setup(TRIG_PIN, GPIO.OUT)
+    GPIO.setup(ECHO_PIN, GPIO.IN)
+
+    main()
