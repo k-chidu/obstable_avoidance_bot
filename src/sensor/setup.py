@@ -20,7 +20,9 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "US_sensor = sensor.US_measure:main"
+            'middle_sensor = sensor.US_middle:main',
+            'left_sensor = sensor.US_left:main',
+            'right_sensor = sensor.US_right:main'
         ],
     },
 )

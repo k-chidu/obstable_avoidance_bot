@@ -10,6 +10,14 @@ import time
 class SensorNode(Node):
     def __init__(self):
         super().__init__('left_sensor_node')
+        
+        # GPIO setup
+        GPIO.setmode(GPIO.BCM)
+        self.TRIG_PIN = 23
+        self.ECHO_PIN = 24
+        GPIO.setup(self.TRIG_PIN, GPIO.OUT)
+        GPIO.setup(self.ECHO_PIN, GPIO.IN)
+
         self.publisher_ = self.create_publisher(Float32, 'left_sensor_measurement', 1)
         self.timer = self.create_timer(0.1, self.publish_distance)
 
@@ -46,17 +54,15 @@ class SensorNode(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = SensorNode()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
+        GPIO.cleanup()  # Cleanup GPIO on script exit
 
-if __name__ == '__main__':
-    GPIO.setmode(GPIO.BCM)
-    TRIG_PIN = 23
-    ECHO_PIN = 24
 
-    # Setup GPIO pins
-    GPIO.setup(TRIG_PIN, GPIO.OUT)
-    GPIO.setup(ECHO_PIN, GPIO.IN)
-
+if __name__ == '__main__':Itry:
     main()
