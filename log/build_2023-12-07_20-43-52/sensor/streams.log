@@ -1,0 +1,47 @@
+[3.252s] Invoking command in '/home/raspi/mpmc_ws/src/sensor': PYTHONPATH=/home/raspi/mpmc_ws/build/sensor/prefix_override:/home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/sensor build --build-base /home/raspi/mpmc_ws/build/sensor/build install --record /home/raspi/mpmc_ws/build/sensor/install.log --single-version-externally-managed
+[4.116s] running egg_info
+[4.117s] creating ../../build/sensor/sensor.egg-info
+[4.118s] writing ../../build/sensor/sensor.egg-info/PKG-INFO
+[4.119s] writing dependency_links to ../../build/sensor/sensor.egg-info/dependency_links.txt
+[4.120s] writing entry points to ../../build/sensor/sensor.egg-info/entry_points.txt
+[4.120s] writing requirements to ../../build/sensor/sensor.egg-info/requires.txt
+[4.121s] writing top-level names to ../../build/sensor/sensor.egg-info/top_level.txt
+[4.121s] writing manifest file '../../build/sensor/sensor.egg-info/SOURCES.txt'
+[4.128s] reading manifest file '../../build/sensor/sensor.egg-info/SOURCES.txt'
+[4.131s] writing manifest file '../../build/sensor/sensor.egg-info/SOURCES.txt'
+[4.131s] running build
+[4.132s] running build_py
+[4.132s] creating /home/raspi/mpmc_ws/build/sensor/build
+[4.133s] creating /home/raspi/mpmc_ws/build/sensor/build/lib
+[4.133s] creating /home/raspi/mpmc_ws/build/sensor/build/lib/sensor
+[4.133s] copying sensor/US_left.py -> /home/raspi/mpmc_ws/build/sensor/build/lib/sensor
+[4.134s] copying sensor/US_right.py -> /home/raspi/mpmc_ws/build/sensor/build/lib/sensor
+[4.137s] copying sensor/__init__.py -> /home/raspi/mpmc_ws/build/sensor/build/lib/sensor
+[4.138s] copying sensor/US_middle.py -> /home/raspi/mpmc_ws/build/sensor/build/lib/sensor
+[4.140s] running install
+[4.141s] /usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+[4.142s]   warnings.warn(
+[4.143s] running install_lib
+[4.147s] creating /home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages/sensor
+[4.147s] copying /home/raspi/mpmc_ws/build/sensor/build/lib/sensor/US_left.py -> /home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages/sensor
+[4.148s] copying /home/raspi/mpmc_ws/build/sensor/build/lib/sensor/US_right.py -> /home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages/sensor
+[4.149s] copying /home/raspi/mpmc_ws/build/sensor/build/lib/sensor/__init__.py -> /home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages/sensor
+[4.150s] copying /home/raspi/mpmc_ws/build/sensor/build/lib/sensor/US_middle.py -> /home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages/sensor
+[4.152s] byte-compiling /home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages/sensor/US_left.py to US_left.cpython-310.pyc
+[4.155s] byte-compiling /home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages/sensor/US_right.py to US_right.cpython-310.pyc
+[4.158s] byte-compiling /home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages/sensor/__init__.py to __init__.cpython-310.pyc
+[4.159s] byte-compiling /home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages/sensor/US_middle.py to US_middle.cpython-310.pyc
+[4.161s] running install_data
+[4.163s] creating /home/raspi/mpmc_ws/install/sensor/share/ament_index
+[4.163s] creating /home/raspi/mpmc_ws/install/sensor/share/ament_index/resource_index
+[4.164s] creating /home/raspi/mpmc_ws/install/sensor/share/ament_index/resource_index/packages
+[4.164s] copying resource/sensor -> /home/raspi/mpmc_ws/install/sensor/share/ament_index/resource_index/packages
+[4.164s] copying package.xml -> /home/raspi/mpmc_ws/install/sensor/share/sensor
+[4.165s] running install_egg_info
+[4.171s] Copying ../../build/sensor/sensor.egg-info to /home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages/sensor-0.0.0-py3.10.egg-info
+[4.176s] running install_scripts
+[4.251s] Installing left_sensor script to /home/raspi/mpmc_ws/install/sensor/lib/sensor
+[4.251s] Installing middle_sensor script to /home/raspi/mpmc_ws/install/sensor/lib/sensor
+[4.252s] Installing right_sensor script to /home/raspi/mpmc_ws/install/sensor/lib/sensor
+[4.253s] writing list of installed files to '/home/raspi/mpmc_ws/build/sensor/install.log'
+[4.364s] Invoked command in '/home/raspi/mpmc_ws/src/sensor' returned '0': PYTHONPATH=/home/raspi/mpmc_ws/build/sensor/prefix_override:/home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/sensor build --build-base /home/raspi/mpmc_ws/build/sensor/build install --record /home/raspi/mpmc_ws/build/sensor/install.log --single-version-externally-managed

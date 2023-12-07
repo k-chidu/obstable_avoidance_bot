@@ -1,0 +1,5 @@
+[console_scripts]
+left_sensor = sensor.US_left:main
+middle_sensor = sensor.US_middle:main
+right_sensor = sensor.US_right:main
+
