@@ -26,15 +26,15 @@ class SensorNode(Node):
         pulse_end_time = 0
 
         # Trigger pulse
-        GPIO.output(TRIG_PIN, GPIO.HIGH)
+        GPIO.output(self.TRIG_PIN, GPIO.HIGH)
         time.sleep(0.00001)
-        GPIO.output(TRIG_PIN, GPIO.LOW)
+        GPIO.output(self.TRIG_PIN, GPIO.LOW)
 
         # Measure time for echo
-        while GPIO.input(ECHO_PIN) == 0:
+        while GPIO.input(self.ECHO_PIN) == 0:
             pulse_start_time = time.time()
 
-        while GPIO.input(ECHO_PIN) == 1:
+        while GPIO.input(self.ECHO_PIN) == 1:
             pulse_end_time = time.time()
 
         # Calculate distance in centimeters
@@ -64,5 +64,5 @@ def main(args=None):
         GPIO.cleanup()  # Cleanup GPIO on script exit
 
 
-if __name__ == '__main__':Itry:
+if __name__ == '__main__':
     main()

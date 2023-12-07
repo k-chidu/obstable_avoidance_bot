@@ -52,8 +52,8 @@ def main(args=None):
 
 if __name__ == '__main__':
     GPIO.setmode(GPIO.BCM)
-    TRIG_PIN = 8
-    ECHO_PIN = 7
+    TRIG_PIN =21
+    ECHO_PIN = 22
 
     # Setup GPIO pins
     GPIO.setup(TRIG_PIN, GPIO.OUT)
