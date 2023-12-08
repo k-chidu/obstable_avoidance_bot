@@ -1,0 +1,6 @@
+/usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+  warnings.warn(
+  File "/home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages/sensor/motor_control.py", line 32
+    def left_callback(self, msg: Float32):
+SyntaxError: expected 'except' or 'finally' block
+

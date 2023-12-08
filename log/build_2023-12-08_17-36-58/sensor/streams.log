@@ -1,0 +1,33 @@
+[4.802s] Invoking command in '/home/raspi/mpmc_ws/src/sensor': PYTHONPATH=/home/raspi/mpmc_ws/build/sensor/prefix_override:/home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/sensor build --build-base /home/raspi/mpmc_ws/build/sensor/build install --record /home/raspi/mpmc_ws/build/sensor/install.log --single-version-externally-managed
+[5.658s] running egg_info
+[5.660s] writing ../../build/sensor/sensor.egg-info/PKG-INFO
+[5.662s] writing dependency_links to ../../build/sensor/sensor.egg-info/dependency_links.txt
+[5.663s] writing entry points to ../../build/sensor/sensor.egg-info/entry_points.txt
+[5.663s] writing requirements to ../../build/sensor/sensor.egg-info/requires.txt
+[5.664s] writing top-level names to ../../build/sensor/sensor.egg-info/top_level.txt
+[5.671s] reading manifest file '../../build/sensor/sensor.egg-info/SOURCES.txt'
+[5.674s] writing manifest file '../../build/sensor/sensor.egg-info/SOURCES.txt'
+[5.675s] running build
+[5.675s] running build_py
+[5.676s] copying sensor/motor_control.py -> /home/raspi/mpmc_ws/build/sensor/build/lib/sensor
+[5.678s] running install
+[5.679s] /usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+[5.679s]   warnings.warn(
+[5.680s] running install_lib
+[5.684s] copying /home/raspi/mpmc_ws/build/sensor/build/lib/sensor/motor_control.py -> /home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages/sensor
+[5.687s] byte-compiling /home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages/sensor/motor_control.py to motor_control.cpython-310.pyc
+[5.689s]   File "/home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages/sensor/motor_control.py", line 32
+[5.689s]     def left_callback(self, msg: Float32):
+[5.690s] SyntaxError: expected 'except' or 'finally' block
+[5.690s] 
+[5.690s] running install_data
+[5.691s] running install_egg_info
+[5.698s] removing '/home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages/sensor-0.0.0-py3.10.egg-info' (and everything under it)
+[5.699s] Copying ../../build/sensor/sensor.egg-info to /home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages/sensor-0.0.0-py3.10.egg-info
+[5.704s] running install_scripts
+[5.778s] Installing left_sensor script to /home/raspi/mpmc_ws/install/sensor/lib/sensor
+[5.779s] Installing middle_sensor script to /home/raspi/mpmc_ws/install/sensor/lib/sensor
+[5.780s] Installing motor_driver script to /home/raspi/mpmc_ws/install/sensor/lib/sensor
+[5.780s] Installing right_sensor script to /home/raspi/mpmc_ws/install/sensor/lib/sensor
+[5.782s] writing list of installed files to '/home/raspi/mpmc_ws/build/sensor/install.log'
+[5.893s] Invoked command in '/home/raspi/mpmc_ws/src/sensor' returned '0': PYTHONPATH=/home/raspi/mpmc_ws/build/sensor/prefix_override:/home/raspi/mpmc_ws/install/sensor/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/sensor build --build-base /home/raspi/mpmc_ws/build/sensor/build install --record /home/raspi/mpmc_ws/build/sensor/install.log --single-version-externally-managed
