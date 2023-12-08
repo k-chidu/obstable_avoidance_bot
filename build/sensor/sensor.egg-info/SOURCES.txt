@@ -13,6 +13,7 @@ sensor/US_left.py
 sensor/US_middle.py
 sensor/US_right.py
 sensor/__init__.py
+sensor/motor_control.py
 test/test_copyright.py
 test/test_flake8.py
 test/test_pep257.py

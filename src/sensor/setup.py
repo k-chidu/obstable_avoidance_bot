@@ -22,7 +22,8 @@ setup(
         'console_scripts': [
             'middle_sensor = sensor.US_middle:main',
             'left_sensor = sensor.US_left:main',
-            'right_sensor = sensor.US_right:main'
+            'right_sensor = sensor.US_right:main',
+            'motor_driver = sensor.motor_control:main'
         ],
     },
 )

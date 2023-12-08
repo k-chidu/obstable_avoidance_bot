@@ -13,20 +13,26 @@ class SensorNode(Node):
         self.publisher_ = self.create_publisher(Float32, 'middle_sensor_measurement', 1)
         self.timer = self.create_timer(0.1, self.publish_distance)
 
+        GPIO.setmode(GPIO.BCM)
+        self.TRIG_PIN = 14
+        self.ECHO_PIN = 15
+        GPIO.setup(self.TRIG_PIN, GPIO.OUT)
+        GPIO.setup(self.ECHO_PIN, GPIO.IN)
+
     def measure_distance(self):
         pulse_start_time = 0
         pulse_end_time = 0
 
         # Trigger pulse
-        GPIO.output(TRIG_PIN, GPIO.HIGH)
+        GPIO.output(self.TRIG_PIN, GPIO.HIGH)
         time.sleep(0.00001)
-        GPIO.output(TRIG_PIN, GPIO.LOW)
+        GPIO.output(self.TRIG_PIN, GPIO.LOW)
 
         # Measure time for echo
-        while GPIO.input(ECHO_PIN) == 0:
+        while GPIO.input(self.ECHO_PIN) == 0:
             pulse_start_time = time.time()
 
-        while GPIO.input(ECHO_PIN) == 1:
+        while GPIO.input(self.ECHO_PIN) == 1:
             pulse_end_time = time.time()
 
         # Calculate distance in centimeters
