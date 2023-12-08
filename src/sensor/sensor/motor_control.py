@@ -1,6 +1,6 @@
 import rclpy
 from rclpy.node import Node
-
+import time
 import RPi.GPIO as GPIO
 from std_msgs.msg import Float32
 
@@ -47,21 +47,21 @@ class ChassisController(Node):
         print("middle =", self.middle)
 
         # Your main logic goes here
-        if self.middle <= 10.0:
+        if self.middle <= 15.0:
             # Reduce PWM to stop
-            for duty_cycle in range(20, 0, -10):  # Start from 20% and reduce to 0%
+            for duty_cycle in range(10, 0, -1):  # Start from 20% and reduce to 0%
                 self.pwm_left_fwd.ChangeDutyCycle(duty_cycle)
                 self.pwm_right_fwd.ChangeDutyCycle(duty_cycle)
-                rclpy.spin_once(self, timeout_sec=0.1)  # Allow time for the PWM change
+                time.sleep(0.01)
             # Stop PWM
             self.pwm_left_fwd.stop()
             self.pwm_right_fwd.stop()
         else:
             print("insider")
             # Provide constant PWM of 20%
-            self.pwm_left_fwd.start(20)
-            self.pwm_right_fwd.start(20)
-            rclpy.spin_once(self, timeout_sec=0.1)  # Allow time for the PWM change
+            self.pwm_left_fwd.start(10)
+            self.pwm_right_fwd.start(10)
+            time.sleep(0.01)
 
 def main(args=None):
     rclpy.init(args=args)
