@@ -46,30 +46,33 @@ class ChassisController(Node):
         self.middle = msg.data
         print("middle =", self.middle)
 
-        # Your main logic goes here
-        if self.middle <= 15.0:
-            # Reduce PWM to stop
-            for duty_cycle in range(10, 0, -1):  # Start from 20% and reduce to 0%
-                self.pwm_left_fwd.ChangeDutyCycle(duty_cycle)
-                self.pwm_right_fwd.ChangeDutyCycle(duty_cycle)
-                time.sleep(0.01)
-            # Stop PWM
-            self.pwm_left_fwd.stop()
-            self.pwm_right_fwd.stop()
-        else:
-            print("insider")
-            # Provide constant PWM of 20%
-            self.pwm_left_fwd.start(10)
-            self.pwm_right_fwd.start(10)
-            time.sleep(0.01)
-
 def main(args=None):
     rclpy.init(args=args)
     node = ChassisController()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
-    GPIO.cleanup()  # Cleanup GPIO when exiting
+    try:
+        while rclpy.ok():
+            # Your main logic goes here
+            if node.middle <= 15.0:
+                # Reduce PWM to stop
+                for duty_cycle in range(10, 0, -1):  # Start from 20% and reduce to 0%
+                    node.pwm_left_fwd.ChangeDutyCycle(duty_cycle)
+                    node.pwm_right_fwd.ChangeDutyCycle(duty_cycle)
+                    time.sleep(0.01)
+                # Stop PWM
+                node.pwm_left_fwd.stop()
+                node.pwm_right_fwd.stop()
+            else:
+                print("insider")
+                # Provide constant PWM of 20%
+                node.pwm_left_fwd.start(10)
+                node.pwm_right_fwd.start(10)
+                time.sleep(0.01)
+            
+            rclpy.spin_once(node, timeout_sec=0.1)  # Adjust the timeout as needed
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
+        GPIO.cleanup()  # Cleanup GPIO when exiting
 
 if __name__ == '__main__':
     main()
