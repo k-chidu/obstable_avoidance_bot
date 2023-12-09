@@ -23,11 +23,6 @@ class ChassisController(Node):
         self.right = 0
         self.middle = 0
 
-        self.pwm_left_fwd.start(0)
-        self.pwm_left_bwd.start(0)
-        self.pwm_right_fwd.start(0)
-        self.pwm_right_bwd.start(0)
-
         try:
             GPIO.setup(self.left_fwd, GPIO.OUT)
             GPIO.setup(self.right_fwd, GPIO.OUT)
@@ -38,6 +33,12 @@ class ChassisController(Node):
             self.pwm_right_fwd = GPIO.PWM(self.right_fwd, 1000)
             self.pwm_left_bwd = GPIO.PWM(self.left_bwd, 1000)
             self.pwm_right_bwd = GPIO.PWM(self.right_bwd, 1000)
+
+            self.pwm_left_fwd.start(0)
+            self.pwm_left_bwd.start(0)
+            self.pwm_right_fwd.start(0)
+            self.pwm_right_bwd.start(0)
+
         except:
             pass
 
@@ -58,35 +59,22 @@ class ChassisController(Node):
         V_b = np.matrix([[vel],[w]])
         V = np.matmul(matrix,V_b)
         print(V)
-        try:
-            print("in try")
-            if(V[0]>0):
-                self.pwm_left_fwd.start(abs(V[0]))
-            else:
-                self.pwm_left_bwd.start(abs(V[0]))
 
-            if(V[1]>0):
-                self.pwm_right_fwd.start(abs(V[1]))
-            else:
-                self.pwm_right_bwd.start(abs(V[1]))
-
-    
-        except:
-            if(V[0]>0):
-                self.pwm_left_bwd.stop()
-                self.pwm_left_fwd.ChangeDutyCycle(abs(V[0]))
-            else:
-                self.pwm_left_fwd.stop()
-                self.pwm_left_bwd.ChangeDutyCycle(abs(V[0]))
+        if(V[0]>0):
+            self.pwm_left_bwd.ChangeDutyCycle(0)
+            self.pwm_left_fwd.ChangeDutyCycle(abs(V[0]))
+        else:
+            self.pwm_left_fwd.ChangeDutyCycle(0)
+            self.pwm_left_bwd.ChangeDutyCycle(abs(V[0]))
   
-            if(V[1]>0):
-                self.pwm_right_bwd.stop()
-                self.pwm_right_fwd.ChangeDutyCycle(abs(V[1]))
-            else:
-                self.pwm_right_fwd.stop()
-                self.pwm_right_bwd.ChangeDutyCycle(abs(V[1]))
+        if(V[1]>0):
+            self.pwm_right_bwd.ChangeDutyCycle(0)
+            self.pwm_right_fwd.ChangeDutyCycle(abs(V[1]))
+        else:
+            self.pwm_right_fwd.ChangeDutyCycle(0)
+            self.pwm_right_bwd.ChangeDutyCycle(abs(V[1]))
 
-            time.sleep(0.01)
+        time.sleep(0.01)
 
 
 def main(args=None):
