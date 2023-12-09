@@ -22,6 +22,12 @@ class ChassisController(Node):
         self.left = 0
         self.right = 0
         self.middle = 0
+
+        self.pwm_left_fwd.start(0)
+        self.pwm_left_bwd.start(0)
+        self.pwm_right_fwd.start(0)
+        self.pwm_right_bwd.start(0)
+
         try:
             GPIO.setup(self.left_fwd, GPIO.OUT)
             GPIO.setup(self.right_fwd, GPIO.OUT)
@@ -53,6 +59,7 @@ class ChassisController(Node):
         V = np.matmul(matrix,V_b)
         print(V)
         try:
+            print("in try")
             if(V[0]>0):
                 self.pwm_left_fwd.start(abs(V[0]))
             else:
@@ -66,13 +73,17 @@ class ChassisController(Node):
     
         except:
             if(V[0]>0):
+                self.pwm_left_bwd.stop()
                 self.pwm_left_fwd.ChangeDutyCycle(abs(V[0]))
             else:
+                self.pwm_left_fwd.stop()
                 self.pwm_left_bwd.ChangeDutyCycle(abs(V[0]))
   
             if(V[1]>0):
+                self.pwm_right_bwd.stop()
                 self.pwm_right_fwd.ChangeDutyCycle(abs(V[1]))
             else:
+                self.pwm_right_fwd.stop()
                 self.pwm_right_bwd.ChangeDutyCycle(abs(V[1]))
 
             time.sleep(0.01)
@@ -108,13 +119,17 @@ def main(args=None):
                     w = (45)*0.8
                     node.inv_kine(vel,w)
 
-                if node.left >=15.0:
+                elif node.left >=15.0:
+
+                    print("going left")
                     if node.middle>15.0:
                         vel = 10
                     else:
                         vel = 10*(1 - math.exp(-node.middle/50))
-                    w= (-45)*-0.8
+                    w= (45)*-0.8
                     node.inv_kine(vel,w)
+                else:
+                    pass
             else:
                 # Provide constant PWM of 20%
                 #node.pwm_left_fwd.start(10)
