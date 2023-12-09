@@ -3,7 +3,8 @@ from rclpy.node import Node
 import time
 import RPi.GPIO as GPIO
 from std_msgs.msg import Float32
-
+import numpy as np
+import math
 class ChassisController(Node):
     def __init__(self):
         super().__init__('Controller_node')
@@ -45,6 +46,37 @@ class ChassisController(Node):
     def middle_callback(self, msg: Float32):
         self.middle = msg.data
         print("middle =", self.middle)
+    
+    def inv_kine(self, vel,w):
+        matrix = np.matrix([[1, 0], [1, 1]])
+        V_b = np.matrix([[vel],[w]])
+        V = np.matmul(matrix,V_b)
+        print(V)
+        try:
+            if(V[0]>0):
+                self.pwm_left_fwd.start(abs(V[0]))
+            else:
+                self.pwm_left_bwd.start(abs(V[0]))
+
+            if(V[1]>0):
+                self.pwm_right_fwd.start(abs(V[1]))
+            else:
+                self.pwm_right_bwd.start(abs(V[1]))
+
+    
+        except:
+            if(V[0]>0):
+                self.pwm_left_fwd.ChangeDutyCycle(abs(V[0]))
+            else:
+                self.pwm_left_bwd.ChangeDutyCycle(abs(V[0]))
+  
+            if(V[1]>0):
+                self.pwm_right_fwd.ChangeDutyCycle(abs(V[1]))
+            else:
+                self.pwm_right_bwd.ChangeDutyCycle(abs(V[1]))
+
+            time.sleep(0.01)
+
 
 def main(args=None):
     rclpy.init(args=args)
@@ -52,20 +84,43 @@ def main(args=None):
     try:
         while rclpy.ok():
             # Your main logic goes here
-            if node.middle <= 15.0:
+            if node.middle <= 30.0:
                 # Reduce PWM to stop
+                """
                 for duty_cycle in range(10, 0, -1):  # Start from 20% and reduce to 0%
                     node.pwm_left_fwd.ChangeDutyCycle(duty_cycle)
                     node.pwm_right_fwd.ChangeDutyCycle(duty_cycle)
                     time.sleep(0.01)
+                
+                
+                    
                 # Stop PWM
                 node.pwm_left_fwd.stop()
                 node.pwm_right_fwd.stop()
+                """
+
+                if node.right>=15.0:
+                    if node.middle>15.0:
+                        vel = 10
+                    else:
+                        vel = 10*(1-math.exp(-node.middle/50))
+                        print("vel=",vel)
+                    w = (45)*0.8
+                    node.inv_kine(vel,w)
+
+                if node.left >=15.0:
+                    if node.middle>15.0:
+                        vel = 10
+                    else:
+                        vel = 10*(1 - math.exp(-node.middle/50))
+                    w= (-45)*-0.8
+                    node.inv_kine(vel,w)
             else:
-                print("insider")
                 # Provide constant PWM of 20%
-                node.pwm_left_fwd.start(10)
-                node.pwm_right_fwd.start(10)
+                #node.pwm_left_fwd.start(10)
+                #node.pwm_right_fwd.start(10)
+                node.inv_kine(10,0)
+                print("moving straight")
                 time.sleep(0.01)
             
             rclpy.spin_once(node, timeout_sec=0.1)  # Adjust the timeout as needed
