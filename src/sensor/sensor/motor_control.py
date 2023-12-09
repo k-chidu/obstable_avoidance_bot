@@ -98,26 +98,44 @@ def main(args=None):
                 node.pwm_right_fwd.stop()
                 """
 
-                if node.right>=15.0:
+                if node.right>=20.0:
                     if node.middle>15.0:
                         vel = 10
                     else:
                         vel = 10*(1-math.exp(-node.middle/50))
                         print("vel=",vel)
-                    w = (45)*0.8
+                    w = (45)*1
                     node.inv_kine(vel,w)
 
-                elif node.left >=15.0:
+                elif node.left >=20.0:
 
                     print("going left")
                     if node.middle>15.0:
                         vel = 10
                     else:
                         vel = 10*(1 - math.exp(-node.middle/50))
-                    w= (45)*-0.8
+                    w= (45)*-1
                     node.inv_kine(vel,w)
                 else:
-                    pass
+                    print("you turn")
+                    node.pwm_right_bwd.ChangeDutyCycle(0)
+                    node.pwm_left_fwd.ChangeDutyCycle(0)
+                    node.pwm_right_fwd.ChangeDutyCycle(10)
+                    node.pwm_left_bwd.ChangeDutyCycle(10)
+                    time.sleep(0.01)
+            
+            elif node.right<15:
+                node.pwm_right_bwd.ChangeDutyCycle(0)
+                node.pwm_left_fwd.ChangeDutyCycle(20)
+                node.pwm_right_fwd.ChangeDutyCycle(0)
+                node.pwm_left_bwd.ChangeDutyCycle(0)
+            elif node.left<15:
+                node.pwm_right_bwd.ChangeDutyCycle(0)
+                node.pwm_left_fwd.ChangeDutyCycle(0)
+                node.pwm_right_fwd.ChangeDutyCycle(20)
+                node.pwm_left_bwd.ChangeDutyCycle(0)
+
+
             else:
                 # Provide constant PWM of 20%
                 #node.pwm_left_fwd.start(10)
@@ -129,7 +147,7 @@ def main(args=None):
             rclpy.spin_once(node, timeout_sec=0.1)  # Adjust the timeout as needed
     finally:
         node.destroy_node()
-        rclpy.shutdown()
+        rclpy.shutdow()
         GPIO.cleanup()  # Cleanup GPIO when exiting
 
 if __name__ == '__main__':
